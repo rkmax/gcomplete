@@ -1,0 +1,111 @@
+<html>
+<head>
+    <title>Autocomplet TextArea</title>
+    <script type="text/javascript" src="libs/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="jquery.gcomplete.0.1.2/jquery.gcomplete.0.1.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.gcomplete.0.1.2/jquery.gcomplete.default-theme.css" media="all">    
+</head>
+<body>
+    <textarea id="prueba" cols="40" rows="20">vamos a ver como vamos</textarea>
+</body>
+<script type="text/javascript">
+    jQuery(function($){
+        $('#prueba').gcomplete({
+            oneword: true,
+            limit: 7
+        });
+    })
+    function doGetCaretPosition (ctrl) {
+        var CaretPos = 0;
+        // IE Support
+        if (document.selection) {
+
+            ctrl.focus ();
+            var Sel = document.selection.createRange ();
+
+            Sel.moveStart ('character', -ctrl.value.length);
+
+            CaretPos = Sel.text.length;
+        }
+        // Firefox support
+        else if (ctrl.selectionStart || ctrl.selectionStart == '0')
+            CaretPos = ctrl.selectionStart;
+
+        return (CaretPos);
+
+    } 
+    
+        
+    (function($){
+    $.countLines = function(textarea){
+    // The textarea
+    var ta;
+
+    if (typeof textarea == "string")
+        ta = $(textarea);
+    else if (typeof textarea == "object")
+        ta = textarea;
+
+    // Generate a span after the textarea with a random ID
+    var id = "";
+    for ( var i = 1; i <= 10; i++)
+        id += (Math.floor(Math.random() * 10) + 1);
+
+    ta.after("<span id='s" + id + "'></span>");
+    var span = $("#s" + id);
+
+    // Hide the span
+    span.hide();
+
+    // Apply the font properties of the textarea to the span class
+    $.each(["font-family", "font-size", "text-decoration", "font-style", "font-weight"], function(i, v){
+        span.css(v, ta.css(v));
+    });
+
+    // Get the textarea value
+    var value = ta.val();
+
+    // Get the number of lines
+    var lines = value.split("\n");
+    var linesLen = lines.length;
+
+    // Get a pretty good estimation of the width of a character in the textarea. To get a better average, add more characters and symbols to this list
+    var chars = ["D", "E", "C", "I", "D", "Q", "?", "!", ".", ","];
+
+    var charLen = chars.length;
+    var totalWidth = 0;
+
+    $.each(chars, function(i, v){
+        span.text(v);
+        totalWidth += span.width();
+    });
+
+    // Calculate average width of character
+    var averageWidth = Math.ceil(totalWidth / charLen);
+
+    // Determine missing width (from padding, margins, borders, etc); this is what we will add to each line width
+    var missingWidth = (ta.outerWidth() - ta.width()) * 2;
+
+    // Calculate the number of lines that occupy more than one line
+    var lineWidth;
+
+    var wrappingLines = 0;
+
+    $.each(lines, function(i, v){
+        // Calculate width of line
+        lineWidth = (v.length * averageWidth) + missingWidth;
+        // Check if the line is wrapped
+        if (lineWidth > ta.outerWidth())
+        wrappingLines++;
+    });
+
+    var ret = {};
+    ret["actual"] = linesLen;
+    ret["wrapped"] = wrappingLines;
+    ret["visual"] = linesLen + wrappingLines;
+
+    return ret;
+    };
+})(jQuery);
+</script>
+</html>

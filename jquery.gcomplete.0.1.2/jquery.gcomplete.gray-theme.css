@@ -1,0 +1,68 @@
+/**
+ * jQuery gComplete v0.1.x - gray theme
+ *
+ * Terms of Use - jQuery gComplete
+ * under the MIT (http://www.opensource.org/licenses/mit-license.php) License.
+ *
+ * Copyright 2010 xlune.com All rights reserved.
+ * (http://blog.xlune.com/2010/02/jquerygcomplete.html)
+ */
+
+div.gcomplete-gray-box {
+	border: 1px solid #111111;
+	background-color: #555555;
+	font-size: 16px;
+	font-family: arial,sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #DDDDDD;
+	cursor: default;
+}
+/* Webkit hack. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	div.gcomplete-gray-box {
+		margin-left: 2px;
+		margin-top: 2px;
+	}
+}
+
+/**
+ * List gray Style
+ */
+div.gcomplete-gray-box dl {
+	display: table;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	cursor: gray;
+}
+div.gcomplete-gray-box dl dt {
+	display: table-cell;
+	margin: 0;
+	padding: 2px 2px 2px 6px;
+	line-height: 22px;
+}
+div.gcomplete-gray-box dl dd {
+	display: table-cell;
+	text-align: right;
+	margin: 0;
+	padding: 2px 6px 2px 5em;
+	font-size: 0.8em;
+	line-height: 22px;
+	color: #f8b551;
+}
+
+/**
+ * List rollover Style
+ */
+div.gcomplete-gray-box dl.over {
+	background-color: #FF9900;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+div.gcomplete-gray-box dl.over dt {
+	color: #FFFFFF;
+}
+div.gcomplete-gray-box dl.over dd {
+	color: #FFFFFF;
+}
